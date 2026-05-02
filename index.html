@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nour Imane Kerroumi — Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a14;
+            color: #e0e0e0;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid #1e1e2e;
+        }
+
+        .hero .badge {
+            background: #1e3a5f;
+            color: #60a5fa;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: #60a5fa;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .hero .links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            padding: 12px 28px;
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover { background: #1d4ed8; }
+
+        .btn-secondary {
+            padding: 12px 28px;
+            background: transparent;
+            color: #e0e0e0;
+            border: 1px solid #3a3a5e;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover { border-color: #60a5fa; }
+
+        /* ABOUT */
+        .about {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            color: #9ca3af;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .skill {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            background: #13131f;
+            border: 1px solid #2a2a3e;
+            color: #9ca3af;
+        }
+
+        /* PROJECTS */
+        .projects {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .projects h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .project-card {
+            background: #13131f;
+            border: 1px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: border-color 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #60a5fa;
+        }
+
+        .project-card .tag {
+            display: inline-block;
+            background: #1e3a5f;
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stack-tag {
+            padding: 4px 12px;
+            background: #1a1a2e;
+            border: 1px solid #2a2a3e;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-links a {
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .link-demo {
+            background: #2563eb;
+            color: white;
+        }
+
+        .link-demo:hover { background: #1d4ed8; }
+
+        .link-github {
+            background: transparent;
+            border: 1px solid #3a3a5e;
+            color: #e0e0e0;
+        }
+
+        .link-github:hover { border-color: #60a5fa; }
+
+        /* PUBLICATION */
+        .publication {
+            background: #13131f;
+            border: 1px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .publication .tag {
+            display: inline-block;
+            background: #1a3a2a;
+            color: #4ade80;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 1px solid #1e1e2e;
+        }
+
+        .contact h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .contact p {
+            color: #9ca3af;
+            margin-bottom: 32px;
+        }
+
+        .contact .links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #4b5563;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e1e2e;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="badge">📍 Paris, France — Open to CDI</div>
+    <h1>Nour Imane <span>Kerroumi</span></h1>
+    <p>Data Scientist & ML Engineer. I build intelligent systems that turn complex data into actionable insights — from agentic AI pipelines to deep learning models.</p>
+    <div class="links">
+        <a href="https://linkedin.com/in/nour-imane-kerroumi" class="btn-primary" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Nourimanekerroumi996" class="btn-secondary" target="_blank">GitHub</a>
+        <a href="https://arxiv.org/abs/2507.09084" class="btn-secondary" target="_blank">arXiv Paper</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+    <h2>About Me</h2>
+    <p>MSc with Distinction from Cranfield University in Computational Intelligence. Diplôme d'Ingénieur from ESTIA. Published researcher in deep learning for aviation delay prediction.</p>
+    <p>I specialize in building end-to-end ML systems — from data pipelines to production-ready APIs — with a strong focus on agentic AI and MLOps.</p>
+    <div class="skills">
+        <span class="skill">Python</span>
+        <span class="skill">PyTorch</span>
+        <span class="skill">LangGraph</span>
+        <span class="skill">FastAPI</span>
+        <span class="skill">Docker</span>
+        <span class="skill">AWS</span>
+        <span class="skill">MLflow</span>
+        <span class="skill">Transformers</span>
+        <span class="skill">SQL</span>
+        <span class="skill">CI/CD</span>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+    <h2>Projects</h2>
+
+    <!-- PDF Extraction Agent -->
+    <div class="project-card">
+        <span class="tag">🤖 Agentic AI</span>
+        <h3>PDF Extraction Agent</h3>
+        <p>An agentic AI system that automatically extracts structured data from any PDF — text, tables, dates, amounts, and names. Upload a PDF, get clean JSON back in seconds. Built with LangGraph for agent orchestration, Groq Llama3 for entity extraction, and deployed on Render.</p>
+        <div class="project-stack">
+            <span class="stack-tag">LangGraph</span>
+            <span class="stack-tag">Groq Llama3</span>
+            <span class="stack-tag">FastAPI</span>
+            <span class="stack-tag">Docker</span>
+            <span class="stack-tag">MLflow</span>
+            <span class="stack-tag">pdfplumber</span>
+            <span class="stack-tag">pytesseract</span>
+            <span class="stack-tag">GitHub Actions</span>
+        </div>
+        <div class="project-links">
+            <a href="https://pdf-extraction-agent-17b7.onrender.com" class="link-demo" target="_blank">🚀 Live Demo</a>
+            <a href="https://github.com/Nourimanekerroumi996/pdf-extraction-agent" class="link-github" target="_blank">⭐ GitHub</a>
+        </div>
+    </div>
+
+    <!-- Publication -->
+    <div class="publication">
+        <span class="tag">📄 arXiv Publication</span>
+        <h3>Flight Delay Prediction — Deep Learning Framework</h3>
+        <p>Published research on a transferable deep learning framework for flight delay prediction using a hybrid CNN+LSTM+Attention model. Achieved state-of-the-art results on both US and EU aviation datasets with cross-regional transferability.</p>
+        <div class="project-stack">
+            <span class="stack-tag">PyTorch</span>
+            <span class="stack-tag">CNN</span>
+            <span class="stack-tag">LSTM</span>
+            <span class="stack-tag">Attention</span>
+            <span class="stack-tag">Transfer Learning</span>
+        </div>
+        <div class="project-links">
+            <a href="https://arxiv.org/abs/2507.09084" class="link-demo" target="_blank">📄 Read Paper</a>
+        </div>
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+    <h2>Let's Connect</h2>
+    <p>Looking for a CDI in Data Science & ML Engineering in Paris.</p>
+    <div class="links">
+        <a href="https://linkedin.com/in/nour-imane-kerroumi" class="btn-primary" target="_blank">LinkedIn</a>
+        <a href="mailto:nourimane.kerroumi@outlook.com" class="btn-secondary">Email</a>
+        <a href="https://github.com/Nourimanekerroumi996" class="btn-secondary" target="_blank">GitHub</a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Nour Imane Kerroumi — Built with ❤️ and GitHub Pages
+</footer>
+
+</body>
+</html>
