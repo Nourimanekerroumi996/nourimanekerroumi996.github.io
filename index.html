@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nour Imane Kerroumi — Data Scientist & ML Engineer</title>
+  <meta name="description" content="Portfolio de Nour Imane Kerroumi, Data Scientist & ML Engineer, Paris."/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Portfolio <em>NIK</em></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="formation/index.html"><span class="fr">Formation</span><span class="en">Education</span></a></li>
+        <li><a href="experience/slb.html"><span class="fr">Expérience</span><span class="en">Experience</span></a></li>
+        <li><a href="skills/index.html"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
+        <li><a href="projects/01-pdf-agent.html"><span class="fr">Projets</span><span class="en">Projects</span></a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lb on" onclick="setL('fr')">FR</button>
+        <button class="lb" onclick="setL('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- CANVAS 3D -->
+<canvas id="canvas3d" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+<!-- COVER -->
+<section style="
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding-top:var(--nav-h);
+  position:relative;
+  z-index:1;
+">
+
+  <!-- LEFT : photo -->
+  <div style="position:relative;overflow:hidden;">
+    <img
+      src="assets/photos/nour.jpg"
+      alt="Nour Imane Kerroumi"
+      style="
+        width:100%;height:100%;
+        object-fit:cover;
+        object-position:center top;
+        display:block;
+        filter:brightness(0.88) contrast(1.05);
+      "
+    />
+    <!-- gold overlay bottom fade -->
+    <div style="
+      position:absolute;bottom:0;left:0;right:0;height:40%;
+      background:linear-gradient(to top, rgba(8,8,8,0.85), transparent);
+    "></div>
+  </div>
+
+  <!-- RIGHT : text -->
+  <div style="
+    display:flex;flex-direction:column;justify-content:center;
+    padding:80px clamp(24px,5vw,72px);
+    border-left:1px solid var(--border);
+    background:var(--black);
+  ">
+
+    <div class="eyebrow h1" style="margin-bottom:20px;">
+      Data Scientist &amp; ML Engineer · Paris
+    </div>
+
+    <h1 class="h2" style="
+      font-family:var(--S);
+      font-size:clamp(3rem,6vw,5.5rem);
+      font-weight:700;
+      line-height:0.95;
+      letter-spacing:-0.02em;
+      color:var(--white);
+      margin-bottom:12px;
+    ">
+      Nour&nbsp;Imane<br>
+      <em style="font-style:italic;color:var(--gold);font-weight:300;">Kerroumi</em>
+    </h1>
+
+    <p class="h3" style="
+      font-family:var(--S);
+      font-size:clamp(1rem,2vw,1.3rem);
+      font-style:italic;
+      color:var(--white3);
+      margin-bottom:32px;
+    ">
+      <span class="fr">Ingénieure des données. Architecte de systèmes intelligents.</span>
+      <span class="en">Data engineer. Architect of intelligent systems.</span>
+    </p>
+
+    <div class="gold-line h3"></div>
+
+    <!-- Logo strip -->
+    <div class="h4" style="margin-bottom:32px;">
+      <div style="
+        font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;
+        color:var(--white4);margin-bottom:14px;
+      ">
+        <span class="fr">Formations &amp; Expériences</span>
+        <span class="en">Education &amp; Experience</span>
+      </div>
+      <div class="logo-strip">
+        <img src="assets/logos/cranfield.webp" alt="Cranfield University"/>
+        <img src="assets/logos/estia.png"      alt="ESTIA"/>
+        <img src="assets/logos/slb.png"        alt="SLB"/>
+        <img src="assets/logos/schneider.png"  alt="Schneider Electric"/>
+      </div>
+    </div>
+
+    <div class="avail h5" style="margin-bottom:40px;">
+      <div class="avail-dot"></div>
+      <span class="fr">Disponible · CDI · Toute la France</span>
+      <span class="en">Available · Full-time · All of France</span>
+    </div>
+
+    <div class="h6" style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="projects/01-pdf-agent.html" class="btn btn-gold">
+        <span class="fr">Voir les projets</span>
+        <span class="en">View projects</span>
+      </a>
+      <a href="contact.html" class="btn btn-ghost">
+        <span class="fr">Me contacter</span>
+        <span class="en">Get in touch</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:1;">
+  <span class="f-name">Nour Imane Kerroumi</span>
+  <a href="https://github.com/Nourimanekerroumi996/nourimanekerroumi996.github.io" target="_blank" class="f-link">View source ↗</a>
+</footer>
+
+<script>
+// Language
+function setL(l) {
+  document.documentElement.setAttribute('data-lang', l);
+  document.querySelectorAll('.lb').forEach(b =>
+    b.classList.toggle('on', b.textContent.trim().toLowerCase() === l)
+  );
+}
+
+// THREE.JS — particules dorées + sphère
+window.addEventListener('load', () => {
+  const canvas = document.getElementById('canvas3d');
+  if (!canvas || !window.THREE) return;
+
+  const W = window.innerWidth, H = window.innerHeight;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 100);
+  camera.position.z = 5;
+
+  // Sphère dorée
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1.2, 64, 64),
+    new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.15 })
+  );
+  sphere.position.set(2.5, 0, -1);
+  scene.add(sphere);
+
+  // Wireframe
+  const wire = new THREE.Mesh(
+    new THREE.SphereGeometry(1.22, 22, 22),
+    new THREE.MeshBasicMaterial({ color: 0xe0c068, wireframe: true, opacity: 0.12, transparent: true })
+  );
+  wire.position.copy(sphere.position);
+  scene.add(wire);
+
+  // Particules
+  const N = 320;
+  const pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    pos[i*3]   = (Math.random() - 0.5) * 14;
+    pos[i*3+1] = (Math.random() - 0.5) * 10;
+    pos[i*3+2] = (Math.random() - 0.5) * 8;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const particles = new THREE.Points(pGeo,
+    new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.035, transparent: true, opacity: 0.6 })
+  );
+  scene.add(particles);
+
+  // Lumières
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.5));
+  const pl = new THREE.PointLight(0xffcc66, 3, 12);
+  pl.position.set(4, 3, 3);
+  scene.add(pl);
+  const pl2 = new THREE.PointLight(0xff9944, 1.5, 10);
+  pl2.position.set(-4, -2, 2);
+  scene.add(pl2);
+
+  // Mouse
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx = (e.clientX / W - 0.5) * 2;
+    my = (e.clientY / H - 0.5) * 2;
+  });
+
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  let t = 0;
+  (function animate() {
+    requestAnimationFrame(animate);
+    t += 0.007;
+    sphere.rotation.y = t * 0.35 + mx * 0.25;
+    sphere.rotation.x = Math.sin(t * 0.3) * 0.15 + my * 0.12;
+    sphere.position.y = Math.sin(t * 0.6) * 0.15;
+    wire.rotation.copy(sphere.rotation);
+    wire.position.y = sphere.position.y;
+    particles.rotation.y = t * 0.05;
+    particles.rotation.x = t * 0.025;
+    camera.position.x += (mx * 0.25 - camera.position.x) * 0.04;
+    camera.position.y += (-my * 0.18 - camera.position.y) * 0.04;
+    renderer.render(scene, camera);
+  })();
+});
+</script>
+
+</body>
+</html>
