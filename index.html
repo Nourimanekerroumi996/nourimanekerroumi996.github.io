@@ -5,18 +5,343 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nour Imane Kerroumi — Data Scientist & ML Engineer</title>
   <meta name="description" content="Portfolio de Nour Imane Kerroumi, Data Scientist & ML Engineer, Paris."/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+
+    :root {
+      --cream:  #f5efe4;
+      --cream2: #ede3d2;
+      --gold:   #b8922a;
+      --gold2:  #d4aa44;
+      --ink:    #1a120a;
+      --ink2:   #3a2810;
+      --ink3:   rgba(26,18,10,0.5);
+      --ink4:   rgba(26,18,10,0.25);
+      --S: 'Cormorant', Georgia, serif;
+      --J: 'Jost', sans-serif;
+    }
+
+    [data-lang="fr"] .en { display: none; }
+    [data-lang="en"] .fr { display: none; }
+
+    body {
+      background: var(--cream);
+      font-family: var(--J);
+      font-weight: 300;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* LEFT — photo pleine hauteur */
+    .cover-photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* fade bas de la photo */
+    .cover-photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 35%;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+
+    /* RIGHT — texte */
+    .cover-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 56px;
+      background: var(--cream);
+      border-left: 1px solid rgba(184,146,42,0.15);
+      position: relative;
+    }
+
+    /* top right — nav */
+    .cover-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cover-nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .cover-nav-links a {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .cover-nav-links a:hover { color: var(--gold); }
+
+    .lang-toggle {
+      display: flex;
+      border: 1px solid rgba(184,146,42,0.25);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .lb {
+      font-family: var(--J);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--ink3);
+      transition: all 0.2s;
+    }
+
+    .lb.on { background: var(--gold); color: white; font-weight: 600; }
+
+    /* middle right — main content */
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .cover-issue {
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cover-issue::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* BIG NAME — comme Vogue */
+    .cover-firstname {
+      font-family: var(--S);
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      display: block;
+      animation: hu 0.9s ease 0.2s both;
+    }
+
+    .cover-lastname {
+      font-family: var(--S);
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 32px;
+      animation: hu 0.9s ease 0.4s both;
+    }
+
+    .gold-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 28px;
+      animation: hu 0.9s ease 0.6s both;
+    }
+
+    .cover-title {
+      font-family: var(--S);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-style: italic;
+      color: var(--ink2);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      animation: hu 0.9s ease 0.7s both;
+    }
+
+    .cover-location {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 36px;
+      animation: hu 0.9s ease 0.8s both;
+    }
+
+    /* available pill */
+    .avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border: 1px solid rgba(184,146,42,0.3);
+      border-radius: 100px;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      width: fit-content;
+      margin-bottom: 36px;
+      animation: hu 0.9s ease 0.9s both;
+    }
+
+    .avail-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #7a9e7a;
+      animation: pulse 2.5s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 3px rgba(122,158,122,0.2); }
+      50%      { box-shadow: 0 0 0 6px rgba(122,158,122,0.04); }
+    }
+
+    /* CTA buttons */
+    .cover-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: hu 0.9s ease 1.0s both;
+    }
+
+    .btn {
+      font-family: var(--J);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 12px 26px;
+      text-decoration: none;
+      transition: all 0.22s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: white;
+      font-weight: 600;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(184,146,42,0.28);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(184,146,42,0.3);
+      color: var(--ink2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* bottom right — page number */
+    .cover-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-num {
+      font-family: var(--S);
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--ink4);
+      letter-spacing: 0.1em;
+    }
+
+    .cover-bottom-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(184,146,42,0.2), transparent);
+      margin: 0 20px;
+    }
+
+    /* 3D canvas — subtle behind right side */
+    #canvas3d {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    @keyframes hu {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream2); }
+    ::-webkit-scrollbar-thumb { background: rgba(184,146,42,0.3); }
+
+    @media (max-width: 768px) {
+      .cover { grid-template-columns: 1fr; }
+      .cover-photo { height: 50vh; }
+      .cover-right { padding: 32px 24px; }
+      .cover-nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Portfolio <em>NIK</em></a>
-    <div class="nav-right">
-      <ul class="nav-links">
+<canvas id="canvas3d"></canvas>
+
+<div class="cover">
+
+  <!-- PHOTO pleine hauteur -->
+  <div class="cover-photo">
+    <img src="assets/photos/nour.jpg" alt="Nour Imane Kerroumi"/>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="cover-right" style="position:relative;z-index:1;">
+
+    <!-- NAV -->
+    <div class="cover-nav">
+      <ul class="cover-nav-links">
         <li><a href="formation/index.html"><span class="fr">Formation</span><span class="en">Education</span></a></li>
         <li><a href="experience/slb.html"><span class="fr">Expérience</span><span class="en">Experience</span></a></li>
         <li><a href="skills/index.html"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
@@ -28,122 +353,54 @@
         <button class="lb" onclick="setL('en')">EN</button>
       </div>
     </div>
-  </div>
-</nav>
 
-<!-- CANVAS 3D -->
-<canvas id="canvas3d" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-<!-- COVER -->
-<section style="
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  padding-top:var(--nav-h);
-  position:relative;
-  z-index:1;
-">
-
-  <!-- LEFT : photo -->
-  <div style="position:relative;overflow:hidden;">
-    <img
-      src="assets/photos/nour.jpg"
-      alt="Nour Imane Kerroumi"
-      style="
-        width:100%;height:100%;
-        object-fit:cover;
-        object-position:center top;
-        display:block;
-        filter:brightness(0.88) contrast(1.05);
-      "
-    />
-    <!-- gold overlay bottom fade -->
-    <div style="
-      position:absolute;bottom:0;left:0;right:0;height:40%;
-      background:linear-gradient(to top, rgba(8,8,8,0.85), transparent);
-    "></div>
-  </div>
-
-  <!-- RIGHT : text -->
-  <div style="
-    display:flex;flex-direction:column;justify-content:center;
-    padding:80px clamp(24px,5vw,72px);
-    border-left:1px solid var(--border);
-    background:var(--black);
-  ">
-
-    <div class="eyebrow h1" style="margin-bottom:20px;">
-      Data Scientist &amp; ML Engineer · Paris
-    </div>
-
-    <h1 class="h2" style="
-      font-family:var(--S);
-      font-size:clamp(3rem,6vw,5.5rem);
-      font-weight:700;
-      line-height:0.95;
-      letter-spacing:-0.02em;
-      color:var(--white);
-      margin-bottom:12px;
-    ">
-      Nour&nbsp;Imane<br>
-      <em style="font-style:italic;color:var(--gold);font-weight:300;">Kerroumi</em>
-    </h1>
-
-    <p class="h3" style="
-      font-family:var(--S);
-      font-size:clamp(1rem,2vw,1.3rem);
-      font-style:italic;
-      color:var(--white3);
-      margin-bottom:32px;
-    ">
-      <span class="fr">Ingénieure des données. Architecte de systèmes intelligents.</span>
-      <span class="en">Data engineer. Architect of intelligent systems.</span>
-    </p>
-
-    <div class="gold-line h3"></div>
-
-    <!-- Logo strip -->
-    <div class="h4" style="margin-bottom:32px;">
-      <div style="
-        font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;
-        color:var(--white4);margin-bottom:14px;
-      ">
-        <span class="fr">Formations &amp; Expériences</span>
-        <span class="en">Education &amp; Experience</span>
+    <!-- MAIN -->
+    <div class="cover-main">
+      <div class="cover-issue">
+        <span class="fr">Data Science · Machine Learning · Paris</span>
+        <span class="en">Data Science · Machine Learning · Paris</span>
       </div>
-      <div class="logo-strip">
-        <img src="assets/logos/cranfield.webp" alt="Cranfield University"/>
-        <img src="assets/logos/estia.png"      alt="ESTIA"/>
-        <img src="assets/logos/slb.png"        alt="SLB"/>
-        <img src="assets/logos/schneider.png"  alt="Schneider Electric"/>
+
+      <span class="cover-firstname">Nour Imane</span>
+      <span class="cover-lastname">Kerroumi</span>
+
+      <div class="gold-rule"></div>
+
+      <p class="cover-title">
+        <span class="fr">Data Scientist &amp; ML Engineer</span>
+        <span class="en">Data Scientist &amp; ML Engineer</span>
+      </p>
+
+      <p class="cover-location">
+        <span class="fr">Paris · Mobilité toute la France</span>
+        <span class="en">Paris · Available all of France</span>
+      </p>
+
+      <div class="avail">
+        <div class="avail-dot"></div>
+        <span class="fr">Disponible · CDI</span>
+        <span class="en">Available · Full-time</span>
+      </div>
+
+      <div class="cover-btns">
+        <a href="projects/01-pdf-agent.html" class="btn btn-gold">
+          <span class="fr">Voir les projets</span>
+          <span class="en">View projects</span>
+        </a>
+        <a href="contact.html" class="btn btn-outline">
+          Contact
+        </a>
       </div>
     </div>
 
-    <div class="avail h5" style="margin-bottom:40px;">
-      <div class="avail-dot"></div>
-      <span class="fr">Disponible · CDI · Toute la France</span>
-      <span class="en">Available · Full-time · All of France</span>
-    </div>
-
-    <div class="h6" style="display:flex;flex-wrap:wrap;gap:12px;">
-      <a href="projects/01-pdf-agent.html" class="btn btn-gold">
-        <span class="fr">Voir les projets</span>
-        <span class="en">View projects</span>
-      </a>
-      <a href="contact.html" class="btn btn-ghost">
-        <span class="fr">Me contacter</span>
-        <span class="en">Get in touch</span>
-      </a>
+    <!-- BOTTOM -->
+    <div class="cover-bottom">
+      <span class="page-num">p. 01</span>
+      <div class="cover-bottom-rule"></div>
     </div>
 
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer style="position:relative;z-index:1;">
-  <span class="f-name">Nour Imane Kerroumi</span>
-  <a href="https://github.com/Nourimanekerroumi996/nourimanekerroumi996.github.io" target="_blank" class="f-link">View source ↗</a>
-</footer>
+</div>
 
 <script>
 // Language
@@ -154,7 +411,7 @@ function setL(l) {
   );
 }
 
-// THREE.JS — particules dorées + sphère
+// THREE.JS particles
 window.addEventListener('load', () => {
   const canvas = document.getElementById('canvas3d');
   if (!canvas || !window.THREE) return;
@@ -168,47 +425,46 @@ window.addEventListener('load', () => {
   const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 100);
   camera.position.z = 5;
 
-  // Sphère dorée
-  const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1.2, 64, 64),
-    new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.15 })
-  );
-  sphere.position.set(2.5, 0, -1);
-  scene.add(sphere);
-
-  // Wireframe
-  const wire = new THREE.Mesh(
-    new THREE.SphereGeometry(1.22, 22, 22),
-    new THREE.MeshBasicMaterial({ color: 0xe0c068, wireframe: true, opacity: 0.12, transparent: true })
-  );
-  wire.position.copy(sphere.position);
-  scene.add(wire);
-
-  // Particules
-  const N = 320;
+  // Particules dorées
+  const N = 280;
   const pos = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
-    pos[i*3]   = (Math.random() - 0.5) * 14;
-    pos[i*3+1] = (Math.random() - 0.5) * 10;
+    pos[i*3]   = (Math.random() - 0.5) * 16;
+    pos[i*3+1] = (Math.random() - 0.5) * 12;
     pos[i*3+2] = (Math.random() - 0.5) * 8;
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const particles = new THREE.Points(pGeo,
-    new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.035, transparent: true, opacity: 0.6 })
+    new THREE.PointsMaterial({
+      color: 0xb8922a,
+      size: 0.04,
+      transparent: true,
+      opacity: 0.8
+    })
   );
   scene.add(particles);
 
-  // Lumières
-  scene.add(new THREE.AmbientLight(0xffeedd, 0.5));
-  const pl = new THREE.PointLight(0xffcc66, 3, 12);
-  pl.position.set(4, 3, 3);
-  scene.add(pl);
-  const pl2 = new THREE.PointLight(0xff9944, 1.5, 10);
-  pl2.position.set(-4, -2, 2);
-  scene.add(pl2);
+  // Sphère dorée subtile
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1.4, 64, 64),
+    new THREE.MeshStandardMaterial({
+      color: 0xc9a84c,
+      metalness: 0.9,
+      roughness: 0.12,
+      transparent: true,
+      opacity: 0.6
+    })
+  );
+  sphere.position.set(3, -0.5, -2);
+  scene.add(sphere);
 
-  // Mouse
+  // Lumières chaudes
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.4));
+  const pl = new THREE.PointLight(0xd4aa44, 2.5, 14);
+  pl.position.set(5, 4, 3);
+  scene.add(pl);
+
   let mx = 0, my = 0;
   window.addEventListener('mousemove', e => {
     mx = (e.clientX / W - 0.5) * 2;
@@ -224,16 +480,13 @@ window.addEventListener('load', () => {
   let t = 0;
   (function animate() {
     requestAnimationFrame(animate);
-    t += 0.007;
-    sphere.rotation.y = t * 0.35 + mx * 0.25;
-    sphere.rotation.x = Math.sin(t * 0.3) * 0.15 + my * 0.12;
-    sphere.position.y = Math.sin(t * 0.6) * 0.15;
-    wire.rotation.copy(sphere.rotation);
-    wire.position.y = sphere.position.y;
-    particles.rotation.y = t * 0.05;
-    particles.rotation.x = t * 0.025;
-    camera.position.x += (mx * 0.25 - camera.position.x) * 0.04;
-    camera.position.y += (-my * 0.18 - camera.position.y) * 0.04;
+    t += 0.006;
+    particles.rotation.y = t * 0.04;
+    particles.rotation.x = t * 0.02;
+    sphere.rotation.y = t * 0.3 + mx * 0.2;
+    sphere.position.y = -0.5 + Math.sin(t * 0.5) * 0.2;
+    camera.position.x += (mx * 0.2 - camera.position.x) * 0.03;
+    camera.position.y += (-my * 0.15 - camera.position.y) * 0.03;
     renderer.render(scene, camera);
   })();
 });
