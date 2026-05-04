@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="projects.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -40,131 +41,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 #canvas3d{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.15}
 main{position:relative;z-index:1;padding-top:var(--nav-h)}
 
-/* PAGE HEADER */
-.page-header{
-  max-width:1400px;margin:0 auto;
-  padding:80px var(--pad) 72px;
-  border-bottom:1px solid var(--goldborder);
-}
+.page-header{max-width:1400px;margin:0 auto;padding:80px var(--pad) 72px;border-bottom:1px solid var(--goldborder)}
 .issue-label{font-size:0.54rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
 .issue-label::before{content:'';width:36px;height:1px;background:var(--gold)}
 .big-title{font-family:var(--S);font-size:clamp(4rem,8vw,8rem);font-weight:700;line-height:0.88;letter-spacing:-0.03em;color:var(--ink)}
 .big-title em{font-style:italic;color:var(--gold);font-weight:300;display:block}
 
-/* PROJECTS GRID */
-.projects-grid{
-  max-width:1400px;margin:0 auto;
-  padding:80px var(--pad);
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:2px;
-}
+.projects-grid{max-width:1400px;margin:0 auto;padding:80px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:2px}
 
-/* PROJECT CARD */
 .proj-card{
-  display:block;
-  text-decoration:none;
-  background:var(--cream2);
-  border:1px solid var(--cream3);
-  padding:52px 48px;
-  position:relative;
-  overflow:hidden;
-  transition:background .3s, transform .3s, box-shadow .3s;
+  display:block;text-decoration:none;
+  background:var(--cream2);border:1px solid var(--cream3);
+  padding:52px 48px;position:relative;overflow:hidden;
+  transition:background .3s,transform .3s,box-shadow .3s;
   cursor:pointer;
 }
-
 .proj-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;height:2px;
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(to right,var(--gold),var(--gold2));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .4s ease;
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
 }
-
-.proj-card:hover{
-  background:white;
-  transform:translateY(-4px);
-  box-shadow:0 20px 60px rgba(184,146,42,0.12);
-}
+.proj-card:hover{background:white;transform:translateY(-4px);box-shadow:0 20px 60px rgba(184,146,42,0.12)}
 .proj-card:hover::before{transform:scaleX(1)}
 
-/* Big number background */
 .proj-bg-num{
-  position:absolute;
-  right:-16px;bottom:-20px;
-  font-family:var(--S);
-  font-size:clamp(120px,18vw,200px);
-  font-weight:700;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(184,146,42,0.07);
-  line-height:1;
-  pointer-events:none;
-  user-select:none;
+  position:absolute;right:-16px;bottom:-20px;
+  font-family:var(--S);font-size:clamp(120px,18vw,200px);font-weight:700;
+  color:transparent;-webkit-text-stroke:1px rgba(184,146,42,0.07);
+  line-height:1;pointer-events:none;user-select:none;
   transition:-webkit-text-stroke .3s;
 }
 .proj-card:hover .proj-bg-num{-webkit-text-stroke:1px rgba(184,146,42,0.15)}
 
 .proj-num{font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
-
-.proj-title{
-  font-family:var(--S);
-  font-size:clamp(1.8rem,3vw,2.8rem);
-  font-weight:700;line-height:1.1;
-  color:var(--ink);margin-bottom:10px;
-  position:relative;z-index:1;
-}
-
-.proj-subtitle{
-  font-family:var(--S);font-style:italic;font-weight:300;
-  font-size:1.05rem;color:var(--ink3);
-  margin-bottom:24px;
-  position:relative;z-index:1;
-}
-
+.proj-title{font-family:var(--S);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:10px;position:relative;z-index:1}
+.proj-subtitle{font-family:var(--S);font-style:italic;font-weight:300;font-size:1.05rem;color:var(--ink3);margin-bottom:24px;position:relative;z-index:1}
 .proj-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px;position:relative;z-index:1}
-.pill{
-  font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 10px;
-  background:var(--cream);border:1px solid var(--cream3);
-  color:var(--ink3);transition:all .2s;
-}
+.pill{font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;background:var(--cream);border:1px solid var(--cream3);color:var(--ink3);transition:all .2s}
 .proj-card:hover .pill{border-color:var(--goldborder);color:var(--gold)}
-
-.proj-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--gold);border-bottom:1px solid rgba(184,146,42,0.3);
-  padding-bottom:3px;
-  transition:gap .25s;
-  position:relative;z-index:1;
-}
+.proj-cta{display:inline-flex;align-items:center;gap:8px;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(184,146,42,0.3);padding-bottom:3px;transition:gap .25s;position:relative;z-index:1}
 .proj-card:hover .proj-cta{gap:14px}
 
-/* Placeholder card */
-.proj-placeholder{
-  background:var(--cream);
-  border:1.5px dashed var(--cream3);
-  padding:52px 48px;
-  display:flex;flex-direction:column;
-  align-items:flex-start;justify-content:center;
-  opacity:0.5;
-}
-.proj-placeholder-title{
-  font-family:var(--S);font-style:italic;
-  font-size:1.4rem;color:var(--ink3);margin-bottom:8px;
-}
-.proj-placeholder-sub{font-size:0.7rem;color:var(--ink4);letter-spacing:0.1em;text-transform:uppercase}
-
-/* REVEAL */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
-.rv2{opacity:0;transform:translateY(24px);transition:opacity .9s ease .15s,transform .9s ease .15s}
-.rv2.in{opacity:1;transform:none}
-.rv3{opacity:0;transform:translateY(24px);transition:opacity .9s ease .3s,transform .9s ease .3s}
-.rv3.in{opacity:1;transform:none}
-.rv4{opacity:0;transform:translateY(24px);transition:opacity .9s ease .45s,transform .9s ease .45s}
-.rv4.in{opacity:1;transform:none}
 
 footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .f-name{font-family:var(--S);font-style:italic;font-size:0.9rem;color:var(--ink3)}
@@ -203,7 +122,6 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
 </nav>
 
 <main>
-
   <div class="page-header rv">
     <div class="issue-label">
       <span class="fr">Projets</span>
@@ -215,103 +133,7 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
     </h1>
   </div>
 
-  <div class="projects-grid">
-
-    <!-- 01 PDF AGENT -->
-    <a href="../projects/index.html" class="proj-card rv">
-      <div class="proj-bg-num">01</div>
-      <div class="proj-num">Projet 01 · AI Agent</div>
-      <h2 class="proj-title">PDF Extraction<br>Agent</h2>
-      <p class="proj-subtitle">
-        <span class="fr">Agent IA autonome pour l'extraction intelligente de PDFs</span>
-        <span class="en">Autonomous AI agent for intelligent PDF extraction</span>
-      </p>
-      <div class="proj-pills">
-        <span class="pill">LangGraph</span>
-        <span class="pill">Groq Llama3</span>
-        <span class="pill">FastAPI</span>
-        <span class="pill">Docker</span>
-        <span class="pill">MLflow</span>
-        <span class="pill">GitHub Actions</span>
-      </div>
-      <div class="proj-cta">
-        <span class="fr">Voir le projet</span>
-        <span class="en">View project</span>
-        →
-      </div>
-    </a>
-
-    <!-- 02 SKYDENIED -->
-    <a href="../projects/02-skydenied.html" class="proj-card rv2">
-      <div class="proj-bg-num">02</div>
-      <div class="proj-num">Projet 02 · Deep Learning · Publication</div>
-      <h2 class="proj-title">SkyDenied</h2>
-      <p class="proj-subtitle">
-        <span class="fr">Prédiction des retards aériens par Deep Learning — publié sur arXiv</span>
-        <span class="en">Flight delay prediction via Deep Learning — published on arXiv</span>
-      </p>
-      <div class="proj-pills">
-        <span class="pill">PyTorch</span>
-        <span class="pill">CNN</span>
-        <span class="pill">LSTM</span>
-        <span class="pill">Attention</span>
-        <span class="pill">Queue Theory</span>
-        <span class="pill">arXiv 2025</span>
-      </div>
-      <div class="proj-cta">
-        <span class="fr">Voir le projet</span>
-        <span class="en">View project</span>
-        →
-      </div>
-    </a>
-
-    <!-- 03 JANE STREET -->
-    <a href="../projects/03-jane-street.html" class="proj-card rv3">
-      <div class="proj-bg-num">03</div>
-      <div class="proj-num">Projet 03 · Finance · Kaggle</div>
-      <h2 class="proj-title">Jane Street<br>Forecasting</h2>
-      <p class="proj-subtitle">
-        <span class="fr">Prédiction de signaux financiers haute fréquence sur données réelles</span>
-        <span class="en">High-frequency financial signal prediction on real market data</span>
-      </p>
-      <div class="proj-pills">
-        <span class="pill">XGBoost</span>
-        <span class="pill">Feature Engineering</span>
-        <span class="pill">12GB data</span>
-        <span class="pill">Kaggle</span>
-      </div>
-      <div class="proj-cta">
-        <span class="fr">Voir le projet</span>
-        <span class="en">View project</span>
-        →
-      </div>
-    </a>
-
-    <!-- 04 AIR QUALITY -->
-    <a href="../projects/04-air-quality.html" class="proj-card rv4">
-      <div class="proj-bg-num">04</div>
-      <div class="proj-num">Projet 04 · Big Data · Distributed</div>
-      <h2 class="proj-title">Air Quality<br>Analysis</h2>
-      <p class="proj-subtitle">
-        <span class="fr">Analyse distribuée de la qualité de l'air sur données internationales</span>
-        <span class="en">Distributed air quality analysis on international sensor data</span>
-      </p>
-      <div class="proj-pills">
-        <span class="pill">PySpark</span>
-        <span class="pill">Docker</span>
-        <span class="pill">Spark SQL</span>
-        <span class="pill">K-Means</span>
-        <span class="pill">AQI</span>
-      </div>
-      <div class="proj-cta">
-        <span class="fr">Voir le projet</span>
-        <span class="en">View project</span>
-        →
-      </div>
-    </a>
-
-  </div>
-
+  <div class="projects-grid" id="projects-grid"></div>
 </main>
 
 <footer>
@@ -320,49 +142,91 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
 </footer>
 
 <script>
-function setL(l){
-  document.documentElement.setAttribute('data-lang',l);
-  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.trim().toLowerCase()===l));
-}
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('fade').style.opacity='0';},50);});
-document.querySelectorAll('a[href]').forEach(link=>{
-  link.addEventListener('click',e=>{
-    const href=link.getAttribute('href');
-    if(!href||href.startsWith('#')||href.startsWith('mailto')||href.startsWith('http'))return;
-    e.preventDefault();
-    const fade=document.getElementById('fade');
-    fade.style.opacity='1';fade.style.pointerEvents='all';
-    setTimeout(()=>{window.location.href=href;},500);
-  });
-});
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
-},{threshold:0.06});
-document.querySelectorAll('.rv,.rv2,.rv3,.rv4').forEach(el=>obs.observe(el));
+// Scroll reveal observer
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }});
+}, {threshold: 0.06});
 
-window.addEventListener('load',()=>{
-  const canvas=document.getElementById('canvas3d');
-  if(!canvas||!window.THREE)return;
-  const W=window.innerWidth,H=window.innerHeight;
-  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-  renderer.setSize(W,H);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60,W/H,0.1,100);
-  camera.position.z=5;
-  const N=180;const pos=new Float32Array(N*3);
+// Render projects from projects.js
+function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  const lang = document.documentElement.getAttribute('data-lang') || 'fr';
+
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <a href="${p.file}" class="proj-card rv" style="transition-delay:${i * 0.12}s">
+      <div class="proj-bg-num">${p.id}</div>
+      <div class="proj-num">Projet ${p.id} · ${p.type}</div>
+      <h2 class="proj-title">${p.title}</h2>
+      <p class="proj-subtitle">${p.subtitle[lang]}</p>
+      <div class="proj-pills">
+        ${p.pills.map(pill => `<span class="pill">${pill}</span>`).join('')}
+      </div>
+      <div class="proj-cta">
+        ${lang === 'fr' ? 'Voir le projet' : 'View project'} →
+      </div>
+    </a>
+  `).join('');
+
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+}
+
+// Language
+function setL(l) {
+  document.documentElement.setAttribute('data-lang', l);
+  document.querySelectorAll('.lb').forEach(b =>
+    b.classList.toggle('on', b.textContent.trim().toLowerCase() === l)
+  );
+  renderProjects();
+}
+
+// Fade
+window.addEventListener('load', () => {
+  renderProjects();
+  setTimeout(() => { document.getElementById('fade').style.opacity = '0'; }, 50);
+});
+
+// Fade out on click
+document.addEventListener('click', e => {
+  const link = e.target.closest('a[href]');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
+  e.preventDefault();
+  const fade = document.getElementById('fade');
+  fade.style.opacity = '1';
+  fade.style.pointerEvents = 'all';
+  setTimeout(() => { window.location.href = href; }, 500);
+});
+
+// THREE.JS
+window.addEventListener('load', () => {
+  const canvas = document.getElementById('canvas3d');
+  if (!canvas || !window.THREE) return;
+  const W = window.innerWidth, H = window.innerHeight;
+  const renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
+  renderer.setSize(W, H); renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, W/H, 0.1, 100);
+  camera.position.z = 5;
+  const N = 180; const pos = new Float32Array(N*3);
   for(let i=0;i<N;i++){pos[i*3]=(Math.random()-0.5)*18;pos[i*3+1]=(Math.random()-0.5)*14;pos[i*3+2]=(Math.random()-0.5)*8;}
-  const geo=new THREE.BufferGeometry();
-  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xb8922a,size:0.035,transparent:true,opacity:0.6})));
-  scene.add(new THREE.AmbientLight(0xffeedd,0.3));
-  let mx=0,my=0;
-  window.addEventListener('mousemove',e=>{mx=(e.clientX/W-0.5)*2;my=(e.clientY/H-0.5)*2;});
-  window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();});
-  let t=0;
-  (function animate(){requestAnimationFrame(animate);t+=0.004;
-    scene.children[0].rotation.y=t*0.03+mx*0.05;
-    scene.children[0].rotation.x=t*0.015+my*0.03;
-    renderer.render(scene,camera);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  scene.add(new THREE.Points(geo, new THREE.PointsMaterial({color:0xb8922a,size:0.035,transparent:true,opacity:0.6})));
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.3));
+  let mx=0, my=0;
+  window.addEventListener('mousemove', e => { mx=(e.clientX/W-0.5)*2; my=(e.clientY/H-0.5)*2; });
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+  let t = 0;
+  (function animate(){
+    requestAnimationFrame(animate); t += 0.004;
+    scene.children[0].rotation.y = t*0.03 + mx*0.05;
+    scene.children[0].rotation.x = t*0.015 + my*0.03;
+    renderer.render(scene, camera);
   })();
 });
 </script>
