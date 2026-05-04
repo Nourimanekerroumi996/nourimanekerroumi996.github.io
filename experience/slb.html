@@ -26,7 +26,6 @@ body{background:var(--cream);color:var(--ink);font-family:var(--J);font-weight:3
 ::-webkit-scrollbar-track{background:var(--cream2)}
 ::-webkit-scrollbar-thumb{background:var(--goldborder);border-radius:2px}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(245,239,228,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--goldborder);display:flex;align-items:center}
 .nav-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad);width:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:var(--S);font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none}
@@ -59,59 +58,166 @@ main{position:relative;z-index:1;padding-top:var(--nav-h)}
 .hero-subtitle{font-family:var(--S);font-style:italic;font-weight:300;font-size:clamp(1.1rem,2vw,1.6rem);color:rgba(255,255,255,0.5)}
 @keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-/* CONTENT WRAPPER */
+/* CONTENT */
 .content{max-width:900px;margin:0 auto;padding:100px var(--pad)}
 
-/* SECTION BLOCK */
-.block{margin-bottom:72px;padding-bottom:72px;border-bottom:1px solid var(--goldborder)}
+.block{margin-bottom:80px;padding-bottom:80px;border-bottom:1px solid var(--goldborder)}
 .block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 
-/* Section label */
 .block-label{
   font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:20px;
-  display:flex;align-items:center;gap:14px;
-  font-weight:600;
+  color:var(--gold);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;font-weight:600;
 }
 .block-label::before{content:'';width:32px;height:1px;background:var(--gold)}
 
-/* Narrative text */
+/* Contexte narrative */
 .narrative{
   font-family:var(--S);
   font-size:clamp(1.15rem,2vw,1.45rem);
-  color:var(--ink2);
-  line-height:1.9;
-  font-weight:400;
+  color:var(--ink2);line-height:1.9;font-weight:400;
 }
 .narrative strong{color:var(--ink);font-weight:600}
 .narrative em{color:var(--gold);font-style:normal}
 
-/* BREVET BLOCK */
-.brevet-block{
+/* MISSIONS avec grands numéros */
+.missions-list{display:flex;flex-direction:column;gap:0}
+
+.mission-item{
+  position:relative;
+  padding:48px 0 48px 0;
+  border-bottom:1px solid var(--goldborder);
+  overflow:hidden;
+}
+.mission-item:last-child{border-bottom:none}
+
+/* Grand numéro en filigrane */
+.mission-bg-num{
+  position:absolute;
+  right:-10px;top:50%;transform:translateY(-50%);
+  font-family:var(--S);
+  font-size:clamp(100px,16vw,180px);
+  font-weight:700;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(184,146,42,0.08);
+  line-height:1;
+  pointer-events:none;
+  user-select:none;
+  transition:color .4s, -webkit-text-stroke .4s;
+}
+
+.mission-item:hover .mission-bg-num{
+  -webkit-text-stroke:1px rgba(184,146,42,0.18);
+}
+
+.mission-label{
+  font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+
+.mission-text{
+  font-family:var(--S);
+  font-size:clamp(1.1rem,2vw,1.35rem);
+  color:var(--ink2);line-height:1.85;
+  max-width:720px;
+  position:relative;z-index:1;
+}
+.mission-text strong{color:var(--ink);font-weight:600}
+.mission-text em{color:var(--gold);font-style:normal}
+
+/* BREVET */
+.brevet-section{
   background:var(--ink);
-  padding:56px 64px;
   position:relative;overflow:hidden;
-  margin-bottom:72px;
+  margin-bottom:0;
 }
-.brevet-block::before{
-  content:'';position:absolute;
-  top:0;left:0;right:0;height:2px;
-  background:linear-gradient(to right,var(--gold),var(--gold2),transparent);
+
+/* CONFIDENTIEL filigrane */
+.brevet-section::before{
+  content:'CONFIDENTIEL';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-15deg);
+  font-family:var(--S);font-weight:700;
+  font-size:clamp(60px,10vw,120px);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(212,170,68,0.06);
+  letter-spacing:0.2em;
+  pointer-events:none;
+  white-space:nowrap;
 }
-.brevet-label{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;display:flex;align-items:center;gap:14px;font-weight:600}
-.brevet-label::before{content:'';width:32px;height:1px;background:var(--gold2)}
-.brevet-title{font-family:var(--S);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:white;line-height:1.15;margin-bottom:20px}
+
+.brevet-inner{
+  max-width:900px;margin:0 auto;
+  padding:80px var(--pad);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:64px;align-items:center;
+}
+
+/* CADENAS SVG animé */
+.lock-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  flex-shrink:0;
+}
+
+.lock-svg{
+  width:80px;height:80px;
+  filter:drop-shadow(0 0 12px rgba(212,170,68,0.4));
+  animation:lockglow 3s ease infinite;
+}
+
+@keyframes lockglow{
+  0%,100%{filter:drop-shadow(0 0 8px rgba(212,170,68,0.3))}
+  50%{filter:drop-shadow(0 0 20px rgba(212,170,68,0.7)) drop-shadow(0 0 40px rgba(212,170,68,0.3))}
+}
+
+/* Shimmer on lock */
+.lock-shimmer{
+  width:80px;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold2),transparent);
+  animation:shimmer 2.5s ease infinite;
+}
+@keyframes shimmer{
+  0%{opacity:0.3;transform:scaleX(0.5)}
+  50%{opacity:1;transform:scaleX(1)}
+  100%{opacity:0.3;transform:scaleX(0.5)}
+}
+
+.lock-label{
+  font-size:0.48rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(212,170,68,0.5);text-align:center;
+}
+
+.brevet-content{}
+
+.brevet-tag{
+  font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.brevet-tag::before{content:'';width:24px;height:1px;background:var(--gold2)}
+
+.brevet-title{
+  font-family:var(--S);
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:700;color:white;
+  line-height:1.1;margin-bottom:20px;
+}
 .brevet-title em{font-style:italic;color:var(--gold2);font-weight:300}
-.brevet-text{font-family:var(--S);font-size:clamp(1.05rem,1.8vw,1.3rem);color:rgba(255,255,255,0.55);line-height:1.9}
+
+.brevet-text{
+  font-family:var(--S);
+  font-size:clamp(1.05rem,1.8vw,1.3rem);
+  color:rgba(255,255,255,0.5);line-height:1.9;
+}
 .brevet-text strong{color:rgba(255,255,255,0.85);font-weight:600}
 .brevet-text em{color:var(--gold2);font-style:normal}
 
-/* RESULTS */
+/* RÉSULTATS */
 .results-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:2px;background:var(--cream3);
-  border:1px solid var(--cream3);
-  margin-top:0;
+  gap:2px;background:var(--cream3);border:1px solid var(--cream3);
 }
 .result-cell{background:var(--cream);padding:40px 28px;text-align:center;transition:background .2s}
 .result-cell:hover{background:white}
@@ -119,7 +225,7 @@ main{position:relative;z-index:1;padding-top:var(--nav-h)}
 .result-desc{font-family:var(--S);font-size:0.95rem;color:var(--ink3);line-height:1.5}
 
 /* STACK TABLE */
-.stack-table{width:100%;border-collapse:collapse;margin-top:0}
+.stack-table{width:100%;border-collapse:collapse}
 .stack-table tr{border-bottom:1px solid var(--cream3);transition:background .15s}
 .stack-table tr:last-child{border-bottom:none}
 .stack-table tr:hover{background:var(--cream2)}
@@ -127,19 +233,27 @@ main{position:relative;z-index:1;padding-top:var(--nav-h)}
 .stack-cat{font-size:0.52rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);width:160px}
 .stack-val{color:var(--ink2);font-family:var(--S);font-size:1.0rem}
 
-/* BACK NAV */
-.back-nav{
+/* NEXT ARROW */
+.next-section{
+  border-top:1px solid var(--goldborder);
+  padding:56px var(--pad);
   max-width:900px;margin:0 auto;
-  padding:0 var(--pad) 60px;
-  display:flex;align-items:center;gap:16px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.back-link{
-  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--ink3);text-decoration:none;
-  display:flex;align-items:center;gap:8px;
-  transition:color .2s;
+.next-label{
+  font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;
 }
-.back-link:hover{color:var(--gold)}
+.next-link{
+  font-family:var(--S);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:600;
+  color:var(--ink);text-decoration:none;transition:color .2s;
+  display:flex;align-items:center;gap:12px;
+}
+.next-link:hover{color:var(--gold)}
+.next-link .arrow{
+  font-size:1.4rem;color:var(--gold);
+  transition:transform .25s;display:inline-block;
+}
+.next-link:hover .arrow{transform:translateX(8px)}
 
 /* REVEAL */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
@@ -149,7 +263,6 @@ main{position:relative;z-index:1;padding-top:var(--nav-h)}
 .rv3{opacity:0;transform:translateY(24px);transition:opacity .9s ease .3s,transform .9s ease .3s}
 .rv3.in{opacity:1;transform:none}
 
-/* FOOTER */
 footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .f-name{font-family:var(--S);font-style:italic;font-size:0.9rem;color:var(--ink3)}
 .f-link{font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink4);text-decoration:none;transition:color .2s}
@@ -159,9 +272,9 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
   .nav-links{display:none}
   .hero-content{padding:48px var(--pad) 40px}
   .content{padding:60px var(--pad)}
-  .brevet-block{padding:36px 24px}
+  .brevet-inner{grid-template-columns:1fr;gap:32px}
   .results-grid{grid-template-columns:1fr 1fr}
-  .stack-table .stack-cat{width:120px}
+  .stack-table .stack-cat{width:100px}
 }
 </style>
 </head>
@@ -170,7 +283,6 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
 <div id="fade" style="position:fixed;inset:0;background:#f5efe4;z-index:9999;pointer-events:none;opacity:1;transition:opacity 0.6s ease;"></div>
 <canvas id="canvas3d"></canvas>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">Nour Imane <em>Kerroumi</em></a>
@@ -194,13 +306,13 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
 
   <!-- HERO -->
   <div class="hero">
-    <img class="hero-photo" src="../assets/photos/schlumberger-campus.jpg" alt="SLB Campus"/>
+    <img class="hero-photo" src="../assets/photos/schlumberger-campus.jpg" alt="SLB"/>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-top">
         <img class="hero-logo" src="../assets/logos/slb.png" alt="SLB"/>
         <div class="hero-meta">
-          <div class="hero-period">05/2025 — 11/2025</div>
+          <div class="hero-period">05/2025 · 11/2025</div>
           <div class="hero-location">Clamart, France</div>
         </div>
       </div>
@@ -215,7 +327,6 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
     <!-- CONTEXTE -->
@@ -226,10 +337,10 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
       </div>
       <p class="narrative">
         <span class="fr">
-          Chez <strong>SLB (ex Schlumberger)</strong>, les outils pétroliers doivent être qualifiés pour résister à des <strong>chocs mécaniques extrêmes</strong> — des campagnes qui peuvent dépasser 12 000 impacts contrôlés. Les simulations par <strong>éléments finis (FEA)</strong> offrent une alternative précieuse, mais chaque run peut prendre <em>plusieurs heures</em> sur des clusters HPC. Mon rôle était de développer un framework de <strong>modèles surrogate</strong> capables de reproduire ces simulations en quelques secondes, sans perte significative de précision.
+          Chez <strong>SLB (ex Schlumberger)</strong>, les outils pétroliers doivent résister à des <strong>chocs mécaniques extrêmes</strong> lors de leur qualification. Les simulations par <strong>éléments finis (FEA)</strong> offrent une alternative aux tests physiques, mais chaque run peut prendre <em>plusieurs heures</em> sur clusters HPC. Ma mission était de développer un framework de <strong>modèles surrogate</strong> capables de reproduire ces simulations en quelques secondes, sans perte de précision.
         </span>
         <span class="en">
-          At <strong>SLB (ex Schlumberger)</strong>, downhole tools must be qualified to withstand <strong>extreme mechanical shocks</strong> — campaigns exceeding 12,000 controlled impacts. <strong>Finite Element Analysis (FEA)</strong> simulations offer a valuable alternative, but each run can take <em>several hours</em> on HPC clusters. My role was to develop a framework of <strong>surrogate models</strong> capable of reproducing these simulations in seconds, with no significant loss of accuracy.
+          At <strong>SLB (ex Schlumberger)</strong>, downhole tools must withstand <strong>extreme mechanical shocks</strong> during qualification. <strong>Finite Element Analysis</strong> simulations offer an alternative to physical testing, but each run can take <em>several hours</em> on HPC clusters. My mission was to develop a <strong>surrogate model framework</strong> capable of reproducing these simulations in seconds, without loss of accuracy.
         </span>
       </p>
     </div>
@@ -240,37 +351,87 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
         <span class="fr">Missions</span>
         <span class="en">Missions</span>
       </div>
-      <p class="narrative">
-        <span class="fr">
-          J'ai d'abord construit une <strong>snapshot matrix</strong> à partir des sorties Abaqus/Explicit, puis appliqué la décomposition <em>POD via SVD</em> pour extraire les modes dominants du système — 10 modes suffisent à capturer plus de 95% de l'énergie sous choc. J'ai ensuite conçu, entraîné et comparé <strong>quatre architectures Deep Learning</strong> pour prédire l'évolution temporelle des coefficients POD : un <em>MLP</em> comme baseline, un <em>LSTM</em> pour les dépendances séquentielles, un <em>Transformer</em> pour les dépendances longue portée, et un <em>Hybrid Transformer-GRU</em> qui s'est révélé le plus performant avec un RMSE inférieur à 0.3%. L'ensemble du pipeline — preprocessing, entraînement, validation croisée, monitoring — a été développé et exécuté sur <strong>infrastructure HPC</strong>.
-        </span>
-        <span class="en">
-          I first built a <strong>snapshot matrix</strong> from Abaqus/Explicit outputs, then applied <em>POD via SVD</em> to extract dominant modes — 10 modes capture over 95% of the system's shock energy. I then designed, trained, and compared <strong>four Deep Learning architectures</strong> to predict the temporal evolution of POD coefficients: an <em>MLP</em> as baseline, an <em>LSTM</em> for sequential dependencies, a <em>Transformer</em> for long-range dependencies, and a <em>Hybrid Transformer-GRU</em> which proved the best performer with RMSE below 0.3%. The full pipeline — preprocessing, training, cross-validation, monitoring — was developed and run on <strong>HPC infrastructure</strong>.
-        </span>
-      </p>
+      <div class="missions-list">
+
+        <div class="mission-item">
+          <div class="mission-bg-num">01</div>
+          <div class="mission-label">
+            <span class="fr">Réduction dimensionnelle</span>
+            <span class="en">Dimensionality reduction</span>
+          </div>
+          <p class="mission-text">
+            <span class="fr">Construction d'une <strong>snapshot matrix</strong> à partir de simulations Abaqus/Explicit puis application de la décomposition <em>POD via SVD</em> pour extraire les modes dominants. Dix modes capturent plus de 95% de l'énergie du système sous choc mécanique.</span>
+            <span class="en">Built a <strong>snapshot matrix</strong> from Abaqus/Explicit outputs then applied <em>POD via SVD</em> to extract dominant modes. Ten modes capture over 95% of the system energy under mechanical shock.</span>
+          </p>
+        </div>
+
+        <div class="mission-item">
+          <div class="mission-bg-num">02</div>
+          <div class="mission-label">Deep Learning</div>
+          <p class="mission-text">
+            <span class="fr">Conception et comparaison de quatre architectures pour prédire l'évolution temporelle des coefficients POD : <strong>MLP</strong> comme baseline, <strong>LSTM</strong> pour les dépendances séquentielles, <strong>Transformer</strong> pour les dépendances longue portée, et le modèle <em>Hybrid Transformer-GRU</em> qui s'est révélé le plus performant avec un RMSE inférieur à 0.3%.</span>
+            <span class="en">Designed and compared four architectures to predict POD coefficient temporal evolution: <strong>MLP</strong> as baseline, <strong>LSTM</strong> for sequential dependencies, <strong>Transformer</strong> for long-range dependencies, and the <em>Hybrid Transformer-GRU</em> which proved the best performer with RMSE below 0.3%.</span>
+          </p>
+        </div>
+
+        <div class="mission-item">
+          <div class="mission-bg-num">03</div>
+          <div class="mission-label">
+            <span class="fr">Pipeline HPC complet</span>
+            <span class="en">Full HPC pipeline</span>
+          </div>
+          <p class="mission-text">
+            <span class="fr">Développement du pipeline complet sur <strong>infrastructure HPC</strong> : preprocessing, normalisation min-max, split 80/20, entraînement avec Adam et early stopping, validation croisée et monitoring RMSE, MAE et R². Réduction du temps de simulation de <em>plusieurs heures à quelques secondes</em>.</span>
+            <span class="en">Built the full pipeline on <strong>HPC infrastructure</strong>: preprocessing, min-max normalisation, 80/20 split, training with Adam and early stopping, cross-validation and RMSE, MAE, R² monitoring. Reduced simulation time from <em>hours to seconds</em>.</span>
+          </p>
+        </div>
+
+      </div>
     </div>
 
   </div>
 
   <!-- BREVET -->
-  <div class="brevet-block rv">
-    <div style="max-width:900px;margin:0 auto;padding:0 var(--pad)">
-      <div class="brevet-label">
-        <span class="fr">Brevet confidentiel · SLB 2025</span>
-        <span class="en">Confidential patent · SLB 2025</span>
+  <div class="brevet-section rv">
+    <div class="brevet-inner">
+      <div class="lock-wrap">
+        <svg class="lock-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Lock body -->
+          <rect x="12" y="36" width="56" height="38" rx="6" fill="rgba(212,170,68,0.12)" stroke="#d4aa44" stroke-width="1.5"/>
+          <!-- Lock shackle -->
+          <path d="M24 36V26C24 16.6 56 16.6 56 26V36" stroke="#d4aa44" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- Keyhole circle -->
+          <circle cx="40" cy="54" r="6" fill="rgba(212,170,68,0.2)" stroke="#d4aa44" stroke-width="1.2"/>
+          <!-- Keyhole stem -->
+          <rect x="37.5" y="57" width="5" height="9" rx="2" fill="rgba(212,170,68,0.3)" stroke="#d4aa44" stroke-width="1"/>
+          <!-- Shimmer line on lock -->
+          <line x1="20" y1="42" x2="60" y2="42" stroke="rgba(212,170,68,0.2)" stroke-width="0.5"/>
+        </svg>
+        <div class="lock-shimmer"></div>
+        <div class="lock-label">
+          <span class="fr">Brevet confidentiel</span>
+          <span class="en">Confidential patent</span>
+        </div>
       </div>
-      <h2 class="brevet-title">
-        <span class="fr">Stratégie <em>Multi-Fidelity</em></span>
-        <span class="en">Multi-Fidelity <em>Strategy</em></span>
-      </h2>
-      <p class="brevet-text">
-        <span class="fr">
-          L'extension vers une approche <strong>multi-fidelity</strong> constitue le cœur de la contribution brevetée. L'idée : utiliser des simulations <em>low-fidelity</em> — rapides, à modèle élastique linéaire — pour entraîner le modèle surrogate, puis <strong>mapper les coefficients POD</strong> vers des résultats <em>high-fidelity</em> via du Transfer Learning. Cette stratégie réduit drastiquement le coût de génération de données tout en préservant la précision des prédictions. Les résultats obtenus ont été <strong>validés</strong> et ont conduit à une <em>contribution à un brevet confidentiel SLB</em>.
-        </span>
-        <span class="en">
-          The extension towards a <strong>multi-fidelity</strong> approach forms the core of the patented contribution. The idea: use <em>low-fidelity</em> simulations — fast, linear elastic model — to train the surrogate, then <strong>map POD coefficients</strong> to <em>high-fidelity</em> results via Transfer Learning. This strategy drastically reduces data generation cost while preserving prediction accuracy. The results were <strong>validated</strong> and led to a <em>contribution to a confidential SLB patent</em>.
-        </span>
-      </p>
+
+      <div class="brevet-content">
+        <div class="brevet-tag">
+          <span class="fr">SLB · 2025</span>
+          <span class="en">SLB · 2025</span>
+        </div>
+        <h2 class="brevet-title">
+          <span class="fr">Stratégie <em>Multi-Fidelity</em></span>
+          <span class="en"><em>Multi-Fidelity</em> Strategy</span>
+        </h2>
+        <p class="brevet-text">
+          <span class="fr">
+            Extension de la méthode vers une approche <strong>multi-fidelity</strong> : utiliser des simulations <em>low-fidelity</em> rapides pour entraîner le modèle surrogate, puis mapper les <strong>coefficients POD</strong> vers des résultats <em>high-fidelity</em> via Transfer Learning. Les résultats ont été <strong>validés</strong> et ont mené à une contribution à un <em>brevet confidentiel SLB</em>.
+          </span>
+          <span class="en">
+            Extended the method to a <strong>multi-fidelity</strong> approach: using fast <em>low-fidelity</em> simulations to train the surrogate, then mapping <strong>POD coefficients</strong> to <em>high-fidelity</em> results via Transfer Learning. Results were <strong>validated</strong> and led to a contribution to a <em>confidential SLB patent</em>.
+          </span>
+        </p>
+      </div>
     </div>
   </div>
 
@@ -286,22 +447,22 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
         <div class="result-cell">
           <span class="result-num">&gt;95%</span>
           <div class="result-desc">
-            <span class="fr">Réduction du temps de calcul — de plusieurs heures à quelques secondes</span>
-            <span class="en">Computation time reduction — from hours to seconds</span>
+            <span class="fr">Réduction du temps de calcul, de plusieurs heures à quelques secondes</span>
+            <span class="en">Computation time reduction, from hours to seconds</span>
           </div>
         </div>
         <div class="result-cell">
           <span class="result-num">&lt;0.3%</span>
           <div class="result-desc">
-            <span class="fr">RMSE du modèle Hybrid Transformer-GRU — reconstruction quasi parfaite</span>
-            <span class="en">RMSE of Hybrid Transformer-GRU — near-perfect reconstruction</span>
+            <span class="fr">RMSE du modèle Hybrid Transformer-GRU, reconstruction quasi parfaite</span>
+            <span class="en">RMSE of Hybrid Transformer-GRU, near-perfect reconstruction</span>
           </div>
         </div>
         <div class="result-cell">
           <span class="result-num">10</span>
           <div class="result-desc">
-            <span class="fr">Modes POD capturant &gt;95% de l'énergie du système sous choc</span>
-            <span class="en">POD modes capturing &gt;95% of system energy under shock</span>
+            <span class="fr">Modes POD capturant plus de 95% de l'énergie du système sous choc</span>
+            <span class="en">POD modes capturing over 95% of system shock energy</span>
           </div>
         </div>
         <div class="result-cell">
@@ -342,8 +503,8 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
         </tr>
         <tr>
           <td class="stack-cat">
-            <span class="fr">Langages & libs</span>
-            <span class="en">Languages & libs</span>
+            <span class="fr">Langages</span>
+            <span class="en">Languages</span>
           </td>
           <td class="stack-val">Python · NumPy · Scikit-learn · Matplotlib · Pandas</td>
         </tr>
@@ -352,9 +513,18 @@ footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:fl
 
   </div>
 
-  <!-- BACK -->
-  <div class="back-nav">
-    <a href="../experience/index.html" class="back-link">← <span class="fr">Retour aux expériences</span><span class="en">Back to experience</span></a>
+  <!-- NEXT : Schneider -->
+  <div class="next-section rv">
+    <div>
+      <div class="next-label">
+        <span class="fr">Expérience suivante</span>
+        <span class="en">Next experience</span>
+      </div>
+      <a href="../experience/schneider.html" class="next-link">
+        Schneider Electric
+        <span class="arrow">↓</span>
+      </a>
+    </div>
   </div>
 
 </main>
