@@ -42,7 +42,7 @@ const PROJECTS = [
     },
     pills: ["PySpark", "Docker", "Spark SQL", "K-Means", "AQI"],
     file: "04-air-quality.html"
-  }
+  },
   {
     id: "05",
     type: "Cloud Computing",
