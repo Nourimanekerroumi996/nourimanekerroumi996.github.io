@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Compétences — Nour Imane Kerroumi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --cream:#f5efe4;--cream2:#ede3d2;--cream3:#e0d0b8;
+  --gold:#b8922a;--gold2:#d4aa44;
+  --golddim:rgba(184,146,42,0.10);--goldborder:rgba(184,146,42,0.20);
+  --ink:#1a120a;--ink2:#3a2810;--ink3:rgba(26,18,10,0.55);--ink4:rgba(26,18,10,0.22);
+  --S:'Cormorant',Georgia,serif;--J:'Jost',sans-serif;
+  --nav-h:60px;--pad:clamp(24px,5vw,80px);
+}
+[data-lang="fr"] .en{display:none}
+[data-lang="en"] .fr{display:none}
+body{background:var(--cream);color:var(--ink);font-family:var(--J);font-weight:300;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--goldborder);border-radius:2px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(245,239,228,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--goldborder);display:flex;align-items:center}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad);width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--S);font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--gold);font-weight:300}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;transition:color .2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.lang-toggle{display:flex;border:1px solid var(--goldborder);border-radius:100px;overflow:hidden}
+.lb{font-family:var(--J);font-size:0.56rem;letter-spacing:0.1em;padding:5px 12px;background:transparent;border:none;cursor:pointer;color:var(--ink3);transition:all .2s}
+.lb.on{background:var(--gold);color:white;font-weight:600}
+
+#canvas3d{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.12}
+main{position:relative;z-index:1;padding-top:var(--nav-h)}
+
+/* PAGE HEADER */
+.page-header{max-width:1400px;margin:0 auto;padding:80px var(--pad) 72px;border-bottom:1px solid var(--goldborder)}
+.issue-label{font-size:0.54rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.issue-label::before{content:'';width:36px;height:1px;background:var(--gold)}
+.big-title{font-family:var(--S);font-size:clamp(4rem,8vw,8rem);font-weight:700;line-height:0.88;letter-spacing:-0.03em;color:var(--ink)}
+.big-title em{font-style:italic;color:var(--gold);font-weight:300;display:block}
+
+/* SKILLS CONTENT */
+.skills-content{max-width:1400px;margin:0 auto;padding:80px var(--pad)}
+
+/* Skill group */
+.skill-group{
+  padding:52px 0;
+  border-bottom:1px solid var(--goldborder);
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:60px;
+  align-items:start;
+}
+.skill-group:last-child{border-bottom:none}
+
+.group-left{}
+
+.group-num{
+  font-size:0.54rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+
+.group-title{
+  font-family:var(--S);
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:700;line-height:1.1;
+  color:var(--ink);margin-bottom:8px;
+}
+
+.group-title em{font-style:italic;color:var(--gold);font-weight:300}
+
+.group-desc{
+  font-size:0.82rem;color:var(--ink3);
+  line-height:1.7;margin-top:12px;
+}
+
+.group-right{}
+
+/* Tags */
+.tags-wrap{display:flex;flex-wrap:wrap;gap:8px}
+
+.stag{
+  font-family:var(--J);
+  font-size:0.72rem;
+  letter-spacing:0.05em;
+  padding:8px 16px;
+  background:var(--cream2);
+  border:1px solid var(--cream3);
+  color:var(--ink2);
+  transition:all .2s;
+  cursor:default;
+  position:relative;
+  overflow:hidden;
+}
+
+.stag::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+
+.stag:hover{
+  background:white;
+  border-color:var(--goldborder);
+  color:var(--ink);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(184,146,42,0.1);
+}
+
+.stag:hover::before{transform:scaleX(1)}
+
+/* Language tags special */
+.lang-tags{display:flex;flex-wrap:wrap;gap:10px}
+
+.lang-tag{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;
+  background:var(--cream2);border:1px solid var(--cream3);
+  transition:all .2s;
+}
+
+.lang-tag:hover{background:white;border-color:var(--goldborder);transform:translateY(-2px)}
+
+.lang-flag{font-size:1.2rem}
+
+.lang-info{}
+
+.lang-name{
+  font-family:var(--S);font-size:0.95rem;font-weight:600;
+  color:var(--ink);display:block;
+}
+
+.lang-level{
+  font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* NEXT arrow */
+.next-section{
+  border-top:1px solid var(--goldborder);
+  padding:56px var(--pad);
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:center;justify-content:flex-end;
+}
+.next-link{
+  font-family:var(--S);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:600;
+  color:var(--ink);text-decoration:none;transition:color .2s;
+  display:flex;align-items:center;gap:12px;
+}
+.next-link:hover{color:var(--gold)}
+.next-link .arrow{font-size:1.4rem;color:var(--gold);transition:transform .25s;display:inline-block}
+.next-link:hover .arrow{transform:translateX(8px)}
+.next-label{font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;text-align:right}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.rv.in{opacity:1;transform:none}
+.rv2{opacity:0;transform:translateY(24px);transition:opacity .9s ease .1s,transform .9s ease .1s}
+.rv2.in{opacity:1;transform:none}
+
+footer{border-top:1px solid var(--goldborder);padding:24px var(--pad);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.f-name{font-family:var(--S);font-style:italic;font-size:0.9rem;color:var(--ink3)}
+.f-link{font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink4);text-decoration:none;transition:color .2s}
+.f-link:hover{color:var(--gold)}
+
+@media(max-width:820px){
+  .nav-links{display:none}
+  .skill-group{grid-template-columns:1fr;gap:28px}
+}
+</style>
+</head>
+<body>
+
+<div id="fade" style="position:fixed;inset:0;background:#f5efe4;z-index:9999;pointer-events:none;opacity:1;transition:opacity 0.6s ease;"></div>
+<canvas id="canvas3d"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">✦ Portfolio</a>
+    <div style="display:flex;align-items:center;gap:24px">
+      <ul class="nav-links">
+        <li><a href="../formation/index.html"><span class="fr">Formation</span><span class="en">Education</span></a></li>
+        <li><a href="../experience/index.html"><span class="fr">Expérience</span><span class="en">Experience</span></a></li>
+        <li><a href="../skills/index.html" class="active"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
+        <li><a href="../projects/index.html"><span class="fr">Projets</span><span class="en">Projects</span></a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lb on" onclick="setL('fr')">FR</button>
+        <button class="lb" onclick="setL('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <div class="page-header rv">
+    <div class="issue-label">
+      <span class="fr">Compétences</span><span class="en">Skills</span>
+    </div>
+    <h1 class="big-title">
+      <span class="fr">Mon<em>arsenal</em></span>
+      <span class="en">My<em>toolkit</em></span>
+    </h1>
+  </div>
+
+  <div class="skills-content">
+
+    <!-- ML / Deep Learning -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">01</div>
+        <h2 class="group-title">ML / <em>Deep Learning</em></h2>
+        <p class="group-desc">
+          <span class="fr">Modèles prédictifs, architectures neuronales, entraînement sur GPU/HPC.</span>
+          <span class="en">Predictive models, neural architectures, training on GPU/HPC.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">PyTorch</span>
+          <span class="stag">TensorFlow</span>
+          <span class="stag">Keras</span>
+          <span class="stag">Scikit-learn</span>
+          <span class="stag">CNN</span>
+          <span class="stag">LSTM</span>
+          <span class="stag">Transformers</span>
+          <span class="stag">GRU</span>
+          <span class="stag">Attention Mechanisms</span>
+          <span class="stag">XGBoost</span>
+          <span class="stag">LightGBM</span>
+          <span class="stag">Hyperparameter tuning</span>
+          <span class="stag">Cross-validation</span>
+          <span class="stag">Feature Engineering</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LLM & IA Générative -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">02</div>
+        <h2 class="group-title">LLM & <em>IA Générative</em></h2>
+        <p class="group-desc">
+          <span class="fr">Agents IA, RAG, fine-tuning de modèles de langage.</span>
+          <span class="en">AI agents, RAG, language model fine-tuning.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">LangChain</span>
+          <span class="stag">LangGraph</span>
+          <span class="stag">RAG</span>
+          <span class="stag">Prompt Engineering</span>
+          <span class="stag">Fine-tuning LoRA</span>
+          <span class="stag">QLoRA</span>
+          <span class="stag">Azure OpenAI</span>
+          <span class="stag">LLAMA</span>
+          <span class="stag">Groq</span>
+          <span class="stag">Pydantic v2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MLOps & Déploiement -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">03</div>
+        <h2 class="group-title">MLOps & <em>Déploiement</em></h2>
+        <p class="group-desc">
+          <span class="fr">Du notebook à la production — tracking, containerisation, CI/CD.</span>
+          <span class="en">From notebook to production — tracking, containerisation, CI/CD.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">MLflow</span>
+          <span class="stag">Docker</span>
+          <span class="stag">FastAPI</span>
+          <span class="stag">GitHub Actions</span>
+          <span class="stag">CI/CD</span>
+          <span class="stag">Render</span>
+          <span class="stag">Pydantic v2</span>
+          <span class="stag">REST API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Engineering -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">04</div>
+        <h2 class="group-title">Data <em>Engineering</em></h2>
+        <p class="group-desc">
+          <span class="fr">Pipelines ETL, traitement distribué, bases de données.</span>
+          <span class="en">ETL pipelines, distributed processing, databases.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">PySpark</span>
+          <span class="stag">Hadoop</span>
+          <span class="stag">ETL</span>
+          <span class="stag">SQL</span>
+          <span class="stag">MongoDB</span>
+          <span class="stag">Pandas</span>
+          <span class="stag">NumPy</span>
+          <span class="stag">Spark SQL</span>
+          <span class="stag">VBA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cloud & Infra -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">05</div>
+        <h2 class="group-title">Cloud & <em>Infra</em></h2>
+        <p class="group-desc">
+          <span class="fr">Environnements cloud, infrastructure HPC, systèmes Unix.</span>
+          <span class="en">Cloud environments, HPC infrastructure, Unix systems.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">AWS S3</span>
+          <span class="stag">AWS EC2</span>
+          <span class="stag">AWS SQS</span>
+          <span class="stag">AWS Lambda</span>
+          <span class="stag">HPC</span>
+          <span class="stag">VMware</span>
+          <span class="stag">Linux</span>
+          <span class="stag">Git</span>
+          <span class="stag">GitHub</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Langages -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">06</div>
+        <h2 class="group-title"><em>Langages</em></h2>
+        <p class="group-desc">
+          <span class="fr">Langages de programmation maîtrisés.</span>
+          <span class="en">Programming languages.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="tags-wrap">
+          <span class="stag">Python</span>
+          <span class="stag">SQL</span>
+          <span class="stag">C</span>
+          <span class="stag">C++</span>
+          <span class="stag">Java</span>
+          <span class="stag">VBA</span>
+          <span class="stag">Bash</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Langues humaines -->
+    <div class="skill-group rv">
+      <div class="group-left">
+        <div class="group-num">07</div>
+        <h2 class="group-title"><em>Langues</em></h2>
+        <p class="group-desc">
+          <span class="fr">Quadrilingue — un atout dans des équipes internationales.</span>
+          <span class="en">Quadrilingual — an asset in international teams.</span>
+        </p>
+      </div>
+      <div class="group-right">
+        <div class="lang-tags">
+          <div class="lang-tag">
+            <span class="lang-flag">🇫🇷</span>
+            <div class="lang-info">
+              <span class="lang-name">Français</span>
+              <span class="lang-level"><span class="fr">Natif</span><span class="en">Native</span></span>
+            </div>
+          </div>
+          <div class="lang-tag">
+            <span class="lang-flag">🇬🇧</span>
+            <div class="lang-info">
+              <span class="lang-name">English</span>
+              <span class="lang-level">C1 · IELTS</span>
+            </div>
+          </div>
+          <div class="lang-tag">
+            <span class="lang-flag">🇸🇦</span>
+            <div class="lang-info">
+              <span class="lang-name">العربية</span>
+              <span class="lang-level"><span class="fr">Natif</span><span class="en">Native</span></span>
+            </div>
+          </div>
+          <div class="lang-tag">
+            <span class="lang-flag">🇪🇸</span>
+            <div class="lang-info">
+              <span class="lang-name">Español</span>
+              <span class="lang-level"><span class="fr">Intermédiaire</span><span class="en">Intermediate</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="next-section">
+    <div style="text-align:right">
+      <div class="next-label">
+        <span class="fr">Page suivante</span><span class="en">Next page</span>
+      </div>
+      <a href="../projects/index.html" class="next-link">
+        <span class="fr">Projets</span><span class="en">Projects</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span class="f-name">Nour Imane Kerroumi</span>
+  <a href="https://github.com/Nourimanekerroumi996/nourimanekerroumi996.github.io" target="_blank" class="f-link">View source ↗</a>
+</footer>
+
+<script>
+function setL(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.trim().toLowerCase()===l));
+}
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('fade').style.opacity='0';},50);});
+document.querySelectorAll('a[href]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const href=link.getAttribute('href');
+    if(!href||href.startsWith('#')||href.startsWith('mailto')||href.startsWith('http'))return;
+    e.preventDefault();
+    const fade=document.getElementById('fade');
+    fade.style.opacity='1';fade.style.pointerEvents='all';
+    setTimeout(()=>{window.location.href=href;},500);
+  });
+});
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
+},{threshold:0.06});
+document.querySelectorAll('.rv,.rv2').forEach(el=>obs.observe(el));
+
+window.addEventListener('load',()=>{
+  const canvas=document.getElementById('canvas3d');
+  if(!canvas||!window.THREE)return;
+  const W=window.innerWidth,H=window.innerHeight;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setSize(W,H);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,W/H,0.1,100);
+  camera.position.z=5;
+  const N=180;const pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-0.5)*18;pos[i*3+1]=(Math.random()-0.5)*14;pos[i*3+2]=(Math.random()-0.5)*8;}
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xb8922a,size:0.035,transparent:true,opacity:0.6})));
+  scene.add(new THREE.AmbientLight(0xffeedd,0.3));
+  let mx=0,my=0;
+  window.addEventListener('mousemove',e=>{mx=(e.clientX/W-0.5)*2;my=(e.clientY/H-0.5)*2;});
+  window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();});
+  let t=0;
+  (function animate(){requestAnimationFrame(animate);t+=0.004;
+    scene.children[0].rotation.y=t*0.03+mx*0.05;
+    scene.children[0].rotation.x=t*0.015+my*0.03;
+    renderer.render(scene,camera);
+  })();
+});
+</script>
+</body>
+</html>
