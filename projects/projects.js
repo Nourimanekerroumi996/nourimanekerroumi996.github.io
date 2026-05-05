@@ -43,4 +43,15 @@ const PROJECTS = [
     pills: ["PySpark", "Docker", "Spark SQL", "K-Means", "AQI"],
     file: "04-air-quality.html"
   }
+  {
+    id: "05",
+    type: "Cloud Computing",
+    title: "Distributed Word Count",
+    subtitle: {
+      fr: "Système distribué AWS pour traitement parallèle de texte",
+      en: "AWS distributed system for parallel text processing"
+    },
+    pills: ["AWS S3", "SQS", "EC2", "CloudWatch", "Python boto3", "Automation"],
+    file: "05-cloud-wordcount.html"
+  }
 ];
