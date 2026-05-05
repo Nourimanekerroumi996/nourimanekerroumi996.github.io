@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV — Nour Imane Kerroumi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+
+/* ── SCREEN ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#faf6ee;
+  --cream2:#f2e8d8;
+  --gold:#b8922a;
+  --gold2:#d4aa44;
+  --goldborder:rgba(184,146,42,0.22);
+  --ink:#1a120a;
+  --ink2:#3a2810;
+  --ink3:#7a6050;
+  --ink4:#b09878;
+  --S:'Cormorant',Georgia,serif;
+  --J:'Jost',sans-serif;
+}
+
+body{
+  background:#e8e0d4;
+  font-family:var(--J);
+  font-weight:300;
+  color:var(--ink);
+  padding:40px 20px;
+  min-height:100vh;
+}
+
+/* A4 page */
+.page{
+  width:210mm;
+  min-height:297mm;
+  background:var(--cream);
+  margin:0 auto;
+  padding:14mm 16mm 14mm 16mm;
+  box-shadow:0 8px 40px rgba(0,0,0,0.15);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Gold top bar */
+.page::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right,var(--gold),var(--gold2),var(--gold));
+}
+
+/* ── HEADER ── */
+.cv-header{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:start;
+  padding-bottom:10mm;
+  border-bottom:1px solid var(--goldborder);
+  margin-bottom:8mm;
+}
+
+.header-left{}
+
+.cv-name{
+  font-family:var(--S);
+  font-size:32pt;
+  font-weight:700;
+  line-height:1.0;
+  color:var(--ink);
+  letter-spacing:-0.02em;
+  margin-bottom:2mm;
+}
+
+.cv-name em{
+  font-style:italic;
+  color:var(--gold);
+  font-weight:300;
+  display:block;
+}
+
+.cv-title{
+  font-family:var(--S);
+  font-style:italic;
+  font-size:11pt;
+  color:var(--ink3);
+  margin-bottom:4mm;
+}
+
+.cv-contacts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 16px;
+}
+
+.cv-contact{
+  font-size:7.5pt;
+  color:var(--ink3);
+  display:flex;
+  align-items:center;
+  gap:4px;
+  text-decoration:none;
+}
+
+.cv-contact span{color:var(--gold);font-size:8pt}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:6mm}
+
+.section-title{
+  font-family:var(--J);
+  font-size:6.5pt;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:3mm;
+  padding-bottom:1.5mm;
+  border-bottom:1px solid var(--goldborder);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* ── EXPERIENCE ── */
+.exp-item{
+  margin-bottom:4mm;
+  padding-bottom:4mm;
+  border-bottom:1px solid rgba(184,146,42,0.1);
+}
+.exp-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.exp-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  margin-bottom:1mm;
+}
+
+.exp-role{
+  font-family:var(--S);
+  font-size:11pt;
+  font-weight:700;
+  color:var(--ink);
+}
+
+.exp-period{
+  font-size:7pt;
+  color:var(--ink4);
+  letter-spacing:0.08em;
+  white-space:nowrap;
+}
+
+.exp-company{
+  font-family:var(--S);
+  font-style:italic;
+  font-size:9.5pt;
+  color:var(--gold);
+  margin-bottom:1.5mm;
+}
+
+.exp-bullets{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:1.5mm;
+}
+
+.exp-bullets li{
+  font-size:8pt;
+  color:var(--ink2);
+  padding-left:10px;
+  position:relative;
+  line-height:1.5;
+}
+
+.exp-bullets li::before{
+  content:'–';
+  position:absolute;
+  left:0;
+  color:var(--gold);
+}
+
+.exp-bullets li strong{
+  color:var(--ink);
+  font-weight:500;
+}
+
+/* ── EDUCATION ── */
+.edu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4mm;
+}
+
+.edu-item{
+  padding:3mm;
+  background:var(--cream2);
+  border-left:2px solid var(--gold);
+}
+
+.edu-degree{
+  font-family:var(--S);
+  font-size:9.5pt;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:1mm;
+  line-height:1.3;
+}
+
+.edu-school{
+  font-family:var(--S);
+  font-style:italic;
+  font-size:8.5pt;
+  color:var(--gold);
+  margin-bottom:1mm;
+}
+
+.edu-detail{
+  font-size:7pt;
+  color:var(--ink3);
+  line-height:1.4;
+}
+
+/* ── PROJECTS ── */
+.proj-item{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:0 8px;
+  align-items:baseline;
+  margin-bottom:2mm;
+  padding-bottom:2mm;
+  border-bottom:1px solid rgba(184,146,42,0.08);
+}
+.proj-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.proj-name{
+  font-family:var(--S);
+  font-size:9.5pt;
+  font-weight:700;
+  color:var(--ink);
+  white-space:nowrap;
+}
+
+.proj-desc{
+  font-size:7.5pt;
+  color:var(--ink3);
+  line-height:1.4;
+}
+
+.proj-link{
+  font-size:6.5pt;
+  color:var(--gold);
+  text-decoration:none;
+  white-space:nowrap;
+  letter-spacing:0.04em;
+}
+
+/* ── SKILLS ── */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3mm;
+}
+
+.skill-group{}
+
+.skill-cat{
+  font-size:6.5pt;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.5mm;
+}
+
+.skill-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2px;
+}
+
+.stag{
+  font-size:6.5pt;
+  padding:1.5px 5px;
+  background:white;
+  border:1px solid var(--goldborder);
+  color:var(--ink2);
+}
+
+/* ── LANGUAGES ── */
+.lang-row{
+  display:flex;
+  gap:6mm;
+  flex-wrap:wrap;
+}
+
+.lang-item{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-size:7.5pt;
+  color:var(--ink2);
+}
+
+.lang-level{
+  font-size:6.5pt;
+  color:var(--ink4);
+}
+
+/* ── PORTFOLIO SECTION ── */
+.portfolio-section{
+  margin-top:6mm;
+  padding-top:5mm;
+  border-top:1px solid var(--goldborder);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:center;
+}
+
+.portfolio-left{}
+
+.portfolio-label{
+  font-size:6.5pt;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:2mm;
+}
+
+.portfolio-title{
+  font-family:var(--S);
+  font-size:13pt;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:1mm;
+}
+
+.portfolio-url{
+  font-family:var(--S);
+  font-style:italic;
+  font-size:9pt;
+  color:var(--gold);
+  margin-bottom:2mm;
+  text-decoration:none;
+  display:block;
+}
+
+.portfolio-desc{
+  font-size:7.5pt;
+  color:var(--ink3);
+  line-height:1.5;
+  max-width:120mm;
+}
+
+.portfolio-right{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2mm;
+}
+
+.qr-label{
+  font-size:6pt;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink4);
+  text-align:center;
+}
+
+/* ── PRINT ── */
+@media print{
+  body{
+    background:none;
+    padding:0;
+  }
+  .page{
+    box-shadow:none;
+    width:100%;
+    min-height:auto;
+    padding:12mm 14mm;
+  }
+  @page{
+    size:A4;
+    margin:0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="cv-header">
+    <div class="header-left">
+      <div class="cv-name">
+        Nour Imane
+        <em>Kerroumi</em>
+      </div>
+      <div class="cv-title">Data Scientist · ML Engineer · Data Engineer · AI Engineer</div>
+      <div class="cv-contacts">
+        <a href="mailto:nourimane.kerroumi@outlook.com" class="cv-contact">
+          <span>✉</span> nourimane.kerroumi@outlook.com
+        </a>
+        <a href="tel:+33656682370" class="cv-contact">
+          <span>📞</span> +33 6 56 68 23 70
+        </a>
+        <span class="cv-contact">
+          <span>📍</span> Paris · Mobilité toute la France
+        </span>
+        <a href="https://www.linkedin.com/in/nour-imane-kerroumi-657990254/" class="cv-contact">
+          <span>in</span> LinkedIn
+        </a>
+        <a href="https://github.com/Nourimanekerroumi996" class="cv-contact">
+          <span>⌥</span> GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="section">
+    <div class="section-title">Profil</div>
+    <p style="font-size:8pt;color:var(--ink2);line-height:1.6;max-width:170mm">
+      Data Scientist et ML Engineer avec une expérience en conception de modèles prédictifs, pipelines ML de bout en bout et IA générative. À l'aise aussi bien dans la phase d'expérimentation que dans l'industrialisation des solutions. Publication de recherche sur arXiv (2025). Curieuse, proactive et en veille technologique permanente.
+    </p>
+  </div>
+
+  <!-- EXPÉRIENCE -->
+  <div class="section">
+    <div class="section-title">Expérience professionnelle</div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Research Machine Learning Engineer</div>
+        <div class="exp-period">05/2025 – 11/2025 · Clamart, France</div>
+      </div>
+      <div class="exp-company">SLB (ex Schlumberger)</div>
+      <ul class="exp-bullets">
+        <li>Développement de modèles <strong>Deep Learning surrogate</strong> (LSTM, Transformers, Transformer-GRU) remplaçant des simulations FEA coûteuses pour la qualification de composants pétroliers sous chocs extrêmes</li>
+        <li>Réduction dimensionnelle par <strong>décomposition POD</strong> · Pipeline ML complet sur infrastructure <strong>HPC</strong> · RMSE &lt;0.3%</li>
+        <li>Réduction du temps de calcul <strong>&gt;95%</strong> (heures → secondes) · Contribution à un <strong>brevet confidentiel</strong> SLB</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Data Engineer</div>
+        <div class="exp-period">05/2024 – 09/2024 · Lattes, France</div>
+      </div>
+      <div class="exp-company">Schneider Electric</div>
+      <ul class="exp-bullets">
+        <li>Développement d'un <strong>outil ETL complet</strong> Python/VBA pour la migration SCADA PCVUE → EcoSUI sur des sites critiques (hôpitaux, aéroports)</li>
+        <li>Automatisation des pipelines de traitement de données · Réduction du temps de migration de <strong>60%</strong> · Déploiement VMware</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FORMATION -->
+  <div class="section">
+    <div class="section-title">Formation académique</div>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="edu-degree">MSc Computational Intelligence for Data Analytics</div>
+        <div class="edu-school">Cranfield University · UK</div>
+        <div class="edu-detail"><strong>Distinction — 73.1/100</strong> · 2024–2025<br>Thèse : Physics-Informed ML for Reduced-Order Shock Simulation (80/100)</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">Diplôme d'Ingénieur Généraliste Trilingue</div>
+        <div class="edu-school">ESTIA École d'ingénieur · Bidart</div>
+        <div class="edu-detail">Ingénierie logicielle & systèmes · 2022–2025</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLICATION -->
+  <div class="section">
+    <div class="section-title">Publication de recherche</div>
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span style="font-family:var(--S);font-size:9pt;font-weight:700;color:var(--ink)">Queue up for Takeoff: A Transferable Deep Learning Framework for Flight Delay Prediction</span>
+      <span style="font-size:7pt;color:var(--gold);white-space:nowrap">arXiv:2507.09084 · 2025</span>
+    </div>
+    <div style="font-size:7pt;color:var(--ink3);margin-top:1mm">CNN + LSTM + Attention · Accuracy 92.7% · F1 93.2% · Transferabilité US → EU validée</div>
+  </div>
+
+  <!-- PROJETS -->
+  <div class="section">
+    <div class="section-title">Projets</div>
+
+    <div class="proj-item">
+      <div class="proj-name">PDF Extraction Agent</div>
+      <div class="proj-desc">Agent IA autonome (LangGraph, 5 nœuds, 4 extracteurs) · FastAPI · Docker · MLflow · Pydantic v2 · CI/CD · Déployé en production</div>
+      <a href="https://pdf-extraction-agent-17b7.onrender.com" class="proj-link">Demo live ↗</a>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-name">SkyDenied</div>
+      <div class="proj-desc">Framework Deep Learning transferable pour prédiction de retards aériens · QT-SimAM · PyTorch · HPC · Publication arXiv</div>
+      <a href="https://arxiv.org/pdf/2507.09084v1" class="proj-link">arXiv ↗</a>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-name">Jane Street Forecasting</div>
+      <div class="proj-desc">Prédiction de signaux financiers haute fréquence (~12GB) · XGBoost · Feature engineering · ROC AUC 0.61 · Kaggle</div>
+      <a href="https://nourimanekerroumi996.github.io/projects/03-jane-street.html" class="proj-link">Voir portfolio ↗</a>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-name">Air Quality Analysis</div>
+      <div class="proj-desc">Analyse distribuée qualité de l'air · PySpark · Docker · Spark SQL · K-Means · AQI · Top 50 régions mondiales</div>
+      <a href="https://nourimanekerroumi996.github.io/projects/04-air-quality.html" class="proj-link">Voir portfolio ↗</a>
+    </div>
+
+  </div>
+
+  <!-- COMPÉTENCES -->
+  <div class="section">
+    <div class="section-title">Compétences</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-cat">ML / Deep Learning</div>
+        <div class="skill-tags">
+          <span class="stag">PyTorch</span><span class="stag">TensorFlow</span>
+          <span class="stag">Scikit-learn</span><span class="stag">CNN</span>
+          <span class="stag">LSTM</span><span class="stag">Transformers</span>
+          <span class="stag">XGBoost</span><span class="stag">LightGBM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-cat">LLM & IA Générative</div>
+        <div class="skill-tags">
+          <span class="stag">LangChain</span><span class="stag">LangGraph</span>
+          <span class="stag">RAG</span><span class="stag">Fine-tuning LoRA</span>
+          <span class="stag">Azure OpenAI</span><span class="stag">Groq</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-cat">MLOps & Data</div>
+        <div class="skill-tags">
+          <span class="stag">MLflow</span><span class="stag">Docker</span>
+          <span class="stag">FastAPI</span><span class="stag">PySpark</span>
+          <span class="stag">SQL</span><span class="stag">ETL</span>
+          <span class="stag">AWS</span><span class="stag">Git</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGUES -->
+  <div class="section">
+    <div class="section-title">Langues</div>
+    <div class="lang-row">
+      <div class="lang-item">🇫🇷 <strong>Français</strong> <span class="lang-level">— Natif</span></div>
+      <div class="lang-item">🇬🇧 <strong>English</strong> <span class="lang-level">— C1 IELTS</span></div>
+      <div class="lang-item">🇸🇦 <strong>Arabe</strong> <span class="lang-level">— Natif</span></div>
+      <div class="lang-item">🇪🇸 <strong>Español</strong> <span class="lang-level">— Intermédiaire</span></div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div class="portfolio-section">
+    <div class="portfolio-left">
+      <div class="portfolio-label">Portfolio en ligne</div>
+      <div class="portfolio-title">nourimanekerroumi996.github.io</div>
+      <a href="https://nourimanekerroumi996.github.io" class="portfolio-url">
+        https://nourimanekerroumi996.github.io
+      </a>
+      <div class="portfolio-desc">
+        Portfolio complet avec détail de chaque projet, expérience et formation. Scannez le QR code ou visitez le lien pour accéder à toutes les démonstrations live et publications.
+      </div>
+    </div>
+    <div class="portfolio-right">
+      <div id="qr-cv"></div>
+      <div class="qr-label">Scanner pour<br>visiter le portfolio</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;margin-top:20px;font-family:var(--J);font-size:0.75rem;color:#888">
+  Pour imprimer en PDF : <strong>Ctrl+P</strong> → Destination : "Enregistrer en PDF" → Format A4 · Sans marges
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  try{
+    new QRCode(document.getElementById('qr-cv'),{
+      text:'https://nourimanekerroumi996.github.io',
+      width:80,height:80,
+      colorDark:'#1a120a',colorLight:'#faf6ee',
+      correctLevel:QRCode.CorrectLevel.M
+    });
+  }catch(e){}
+});
+</script>
+
+</body>
+</html>
